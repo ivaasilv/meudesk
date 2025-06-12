@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Feliz Dia dos Namorados!</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Dancing Script', cursive;
+      background: linear-gradient(to bottom, #fff0f5, #ffe4e1);
+      color: #b22222;
+      text-align: center;
+    }
+    header {
+      padding: 2rem;
+      background-color: #ffb6c1;
+      font-size: 2.5rem;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    .mensagem {
+      margin: 3rem 1rem;
+      font-size: 1.8rem;
+      animation: fadeIn 4s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .galeria {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      padding: 2rem;
+    }
+    .galeria img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .galeria div {
+      width: 150px;
+      height: 150px;
+      background-color: #fff;
+      border: 2px dashed #f08080;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      color: #f08080;
+    }
+    .linha-do-tempo {
+      margin: 2rem auto;
+      max-width: 600px;
+      text-align: center;
+      padding: 1rem;
+    }
+    .linha-do-tempo li {
+      margin-bottom: 1rem;
+      position: relative;
+      padding-left: 1.5rem;
+    }
+    .linha-do-tempo li::before {
+      content: "❤️";
+      position: absolute;
+      left: 0;
+    }
+    .botao {
+      margin: 2rem;
+      padding: 1rem 2rem;
+      background-color: #ff69b4;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 1.2rem;
+    }
+    .historia {
+      display: none;
+      margin: 2rem;
+      font-size: 1.2rem;
+      background-color: #fff5f8;
+      border-radius: 10px;
+      padding: 1.5rem;
+    }
+    audio {
+      position: fixed;
+      bottom: 10px;
+      left: 10px;
+    }
+    
+    .imagem-container {
+      display: inline-block;
+      border: 2px dashed #f08080;
+      border-radius: 12px;
+      overflow: hidden;
+      padding: 0;        /* Muito importante */
+      margin: 10px;       /* Espaço entre as imagens */
+      line-height: 0;     /* Remove espaço extra embaixo da imagem */
+    }
+
+    .imagem-container img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    
+    audio {
+      display: block;
+      margin: 0 auto;
+    }
+    
+  </style>
+</head>
+<body>
+  <header>
+    Feliz Dia dos Namorados!!!
+  </header>
+
+  <div class="mensagem">
+    "Você é o meu para sempre favorito. Cada momento ao seu lado é o meu lugar favorito no mundo."
+  </div>
+
+  <section class="galeria">
+    <div class="imagem-container"><img src = "Imagens/5.jpg"/></div>
+    <div class="imagem-container"><img src = "Imagens/2.jpg"/></div>
+    <div class="imagem-container"><img src = "Imagens/3.jpg"/></div>
+    <div class="imagem-container"><img src = "Imagens/1.jpg"/></div>
+  </section>
+
+  <ul class="linha-do-tempo">
+    <li>Nosso dia - 22/09/2024</li>
+  </ul>
+
+  <button class="botao" onclick="mostrarHistoria()">Clique aquí</button>
+
+  <div class="historia" id="historia">
+    Mo, desculpa por tudo que fiz, mas para mim todo dia com vc já é especial, não só hj, mas sempre!!!
+    Você é meu abrigo, meu sorriso fácil, meu coração em paz!!!
+    Obrigado por me amar do jeitinho que sou, chato, encrequeiro, mas lhe amar muitooo!!! desculpa por não demostrar, mas também é o mwu jeito.
+    Que a gente continue à construir juntos essa história linda que é só nossa.
+    Eu te amo, hoje e sempre!!!"
+  </div>
+
+  <audio controls autoplay loop>
+    <source src="Audios/Perdicao.mp3" type="audio/mpeg">
+    Seu navegador não suporta áudio.
+  </audio>
+
+  <script>
+    function mostrarHistoria() {
+      document.getElementById("historia").style.display = "block";
+    }
+  </script>
+</body>
+</html>
