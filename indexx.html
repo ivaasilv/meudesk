@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Matrix Love</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: black;
+      font-family: "My Love", sans-serif;
+    }
+
+    .Love__You {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 1rem;
+      margin-top: 50px;
+    }
+
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      pointer-events: none;
+    }
+
+    #matrix {
+      z-index: 1;
+    }
+
+    #explosions {
+      z-index: 2;
+    }
+  </style>
+</head>
+<body>
+  <div class="Love__You">
+    <canvas id="matrix"></canvas>
+    <canvas id="explosions"></canvas>
+  </div>
+
+  <script>
+    // MATRIX LOVE EFFECT
+    const canvas = document.getElementById("matrix");
+    const ctx = canvas.getContext("2d");
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const fontSize = 16;
+    const columns = Math.floor(canvas.width / fontSize);
+    const drops = Array(columns).fill(1);
+
+    function drawMatrix() {
+      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = "#ff69b4"; // rosa
+      ctx.font = `${fontSize}px monospace`;
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = "Te Amo";
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
+    }
+
+    setInterval(drawMatrix, 75);
+
+    // PARTICLE EXPLOSIONS
+    const expCanvas = document.getElementById("explosions");
+    const expCtx = expCanvas.getContext("2d");
+
+    expCanvas.width = window.innerWidth;
+    expCanvas.height = window.innerHeight;
+
+    window.addEventListener("resize", () => {
+      canvas.width = expCanvas.width = window.innerWidth;
+      canvas.height = expCanvas.height = window.innerHeight;
+    });
+
+    class Particle {
+      constructor(x, y) {
+        this.x = x;
+        this.y = y;
+        this.radius = Math.random() * 3 + 2;
+        this.speedX = (Math.random() - 0.5) * 6;
+        this.speedY = (Math.random() - 0.5) * 6;
+        this.alpha = 1;
+      }
+
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        this.alpha -= 0.02;
+      }
+
+      draw() {
+        expCtx.globalAlpha = this.alpha;
+        expCtx.beginPath();
+        expCtx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        expCtx.fillStyle = "#ff69b4";
+        expCtx.fill();
+        expCtx.globalAlpha = 1;
+      }
+    }
+
+    let particles = [];
+
+    function createExplosion(x, y) {
+      for (let i = 0; i < 20; i++) {
+        particles.push(new Particle(x, y));
+      }
+    }
+
+    function animateParticles() {
+      expCtx.clearRect(0, 0, expCanvas.width, expCanvas.height);
+      particles.forEach((p, i) => {
+        p.update();
+        p.draw();
+        if (p.alpha <= 0) particles.splice(i, 1);
+      });
+      requestAnimationFrame(animateParticles);
+    }
+
+    animateParticles();
+
+    window.addEventListener("click", (e) => {
+      createExplosion(e.clientX, e.clientY);
+    });
+
+    window.addEventListener("touchstart", (e) => {
+      const touch = e.touches[0];
+      createExplosion(touch.clientX, touch.clientY);
+    });
+  </script>
+</body>
+</html>
