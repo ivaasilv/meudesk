@@ -1,0 +1,5 @@
+body {font-family: Arial; display:flex; gap:20px; padding:20px;}
+.calc {border:1px solid #aaa; padding:10px; width:200px;}
+#display {height:40px; background:#eee; margin-bottom:10px; padding:10px; font-size:20px;}
+button {width:40px; height:40px; margin:5px;}
+#history {border:1px solid #aaa; padding:10px; width:200px; height:250px; overflow:auto;}
